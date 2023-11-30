@@ -1,4 +1,4 @@
-import { ICategory } from './cateory.interface'
+import { ICategory } from './category.interface'
 import { IReview } from './review.interface'
 
 export interface IProduct {
