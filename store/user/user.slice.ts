@@ -3,7 +3,7 @@ import { register } from './user.actions'
 import { IInitialState } from './user.interface'
 
 const initialState: IInitialState = {
-	user: localStorage.getItem('user')
+	user: localStorage?.getItem('user')
 		? JSON.parse(localStorage.getItem('user') as string)
 		: null,
 	isLoading: false
