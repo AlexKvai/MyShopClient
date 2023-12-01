@@ -1,6 +1,6 @@
 import Cookies from 'js-cookie'
 import dynamic from 'next/dynamic'
-import { useRouter } from 'next/router'
+import { usePathname } from 'next/navigation'
 import { FC, PropsWithChildren, useEffect } from 'react'
 import { useActions } from '../../hooks/useActions'
 import { useAuth } from '../../hooks/useAuth'
@@ -16,7 +16,7 @@ const AuthProvider: FC<PropsWithChildren<TypeComponentAuthFields>> = ({
 	const { user } = useAuth()
 	const { checkAuth, logout } = useActions()
 
-	const { pathname } = useRouter()
+	const pathname = usePathname()
 
 	useEffect(() => {
 		const accessToken = getAccessToken()
