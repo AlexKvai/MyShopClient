@@ -31,7 +31,7 @@ export default function RootLayout({
 			<QueryClientProvider client={queryClient}>
 				<Provider store={store}>
 					<PersistGate loading={null} persistor={persistor}>
-						<AuthProvider Component={{ isOnlyUser: Component.isOnlyUser }}>
+						<AuthProvider Component={{ isOnlyUser: Component?.isOnlyUser }}>
 							<body className={inter.className}>{children}</body>
 						</AuthProvider>
 					</PersistGate>
