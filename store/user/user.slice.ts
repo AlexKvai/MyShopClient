@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { register } from './user.actions'
+import { checkAuth, login, register } from './user.actions'
 import { IInitialState } from './user.interface'
 
 const initialState: IInitialState = {
@@ -24,5 +24,18 @@ export const userSlice = createSlice({
 			builder.addCase(register.rejected, state => {
 				state.isLoading = false
 			})
+		builder.addCase(login.pending, state => {
+			state.isLoading = true
+		}),
+			builder.addCase(login.fulfilled, (state, action) => {
+				state.isLoading = false
+				state.user = action.payload.user
+			}),
+			builder.addCase(login.rejected, state => {
+				state.isLoading = false
+			})
+		builder.addCase(checkAuth.fulfilled, (state, { payload }) => {
+			state.user = payload.user
+		})
 	}
 })
