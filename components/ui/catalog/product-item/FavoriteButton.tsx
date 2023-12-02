@@ -8,6 +8,8 @@ import { UserService } from '../../../../services/user.service'
 const FavoriteButton: FC<{ productId: number }> = ({ productId }) => {
 	const { profile } = useProfile()
 
+	if (!profile) return null
+
 	const { invalidateQueries } = useQueryClient()
 
 	const { mutate } = useMutation({
