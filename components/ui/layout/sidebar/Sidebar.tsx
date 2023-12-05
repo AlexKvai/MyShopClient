@@ -56,7 +56,10 @@ const Sidebar: FC = () => {
 			</div>
 
 			{!!user && (
-				<button className='text-white flex items-center ml-10 mb-10'>
+				<button
+					className='text-white flex items-center ml-10 mb-10'
+					onClick={() => logout()}
+				>
 					<FiLogOut /> <span className='ml-2'>Logout</span>
 				</button>
 			)}
