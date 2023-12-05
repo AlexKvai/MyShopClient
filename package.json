@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@chakra-ui/react": "^2.8.2",
     "@reduxjs/toolkit": "^1.9.7",
     "@tanstack/react-query": "^5.10.0",
     "axios": "^1.6.2",
