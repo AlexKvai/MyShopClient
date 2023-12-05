@@ -1,9 +1,11 @@
+import { useMutation } from '@tanstack/react-query'
 import cn from 'clsx'
 import { useRouter } from 'next/navigation'
 import { FC } from 'react'
 import { RiShoppingCartLine } from 'react-icons/ri'
 import { useCart } from '../../../../hooks/useCart'
 import { useOutside } from '../../../../hooks/useOutside'
+import { OrderService } from '../../../../services/order.service'
 import { convertPrice } from '../../../../utils/convertPrice'
 import Button from '../../button/Button'
 import SquareButton from '../../button/SquareButton'
@@ -16,12 +18,18 @@ const HeaderCart: FC = () => {
 
 	const { push } = useRouter()
 
-	/* const {mutate} = useMutation({
-		mutationFn: () => PaymentService.createPayment(total),
-		onSuccess: (data) =>
-			push(data.confirmation.confirmation_url)
+	const { mutate } = useMutation({
+		mutationFn: () =>
+			OrderService.place({
+				items: items.map(item => ({
+					price: item.price,
+					quantity: item.quantity,
+					productId: item.product.id
+				}))
+			}),
+		onSuccess: ({ data }) => push(data.confirmation.confirmation_url)
 	})
-}*/
+
 	return (
 		<div className='relative' ref={ref}>
 			<SquareButton
@@ -52,7 +60,12 @@ const HeaderCart: FC = () => {
 					<div>{convertPrice(total)}</div>
 				</div>
 				<div className='text-center'>
-					<Button variant='white' size='sm' className='btn-link mt-5 mb-2'>
+					<Button
+						variant='white'
+						size='sm'
+						className='btn-link mt-5 mb-2'
+						onClick={() => mutate()}
+					>
 						Place order
 					</Button>
 				</div>
